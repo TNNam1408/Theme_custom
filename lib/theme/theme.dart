@@ -9,26 +9,32 @@ abstract class BaseTheme {
 class ThemeDark extends BaseTheme {
   @override
   // TODO: implement bg
-  Color get bg => Colors.red;
+  Color get bg => Colors.black;
+
+  @override
+  // TODO: implement text
+  Color get text => Colors.yellow;
+}
+
+class ThemeLight extends BaseTheme {
+  @override
+  // TODO: implement bg
+  Color get bg => Colors.white;
 
   @override
   // TODO: implement text
   Color get text => Colors.red;
 }
 
-class ThemeLight extends BaseTheme {
-  @override
-  // TODO: implement bg
-  Color get bg => Colors.red;
-
-  @override
-  // TODO: implement text
-  Color get text => Colors.white;
-}
-
 class AppTheme {
+  // static late BuildContext context;
+  // static void init(BuildContext ctx) {
+  // context = ctx;
+  // }
+
   static BaseTheme of(BuildContext context) {
-    var mode = context.read<AppThemeCubit>().state;
+    //old ctx
+    var mode = context.watch<AppThemeCubit>().state;
     return mode == CThemeMode.light ? ThemeDark() : ThemeLight();
   }
 }

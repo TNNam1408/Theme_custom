@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:theme_dl/Main%203.dart';
+import 'package:theme_dl/theme/theme.dart';
 
 class Main2 extends StatefulWidget {
   const Main2({Key? key}) : super(key: key);
@@ -13,12 +15,17 @@ class _Main2State extends State<Main2> {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        color: Theme.of(context).backgroundColor,
+        color: AppTheme.of(context).bg,
         child: Center(
-          child: Text(
-            "Main 2",
-            style: TextStyle(
-                fontSize: 100, color: Theme.of(context).backgroundColor),
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Main3()));
+            },
+            child: Text(
+              "Main 2",
+              style: TextStyle(fontSize: 100, color: AppTheme.of(context).text),
+            ),
           ),
         ),
       ),

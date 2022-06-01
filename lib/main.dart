@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:theme_dl/screen%202.dart';
 import 'package:theme_dl/theme/theme.dart';
 
 void main() {
@@ -22,11 +23,17 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AppThemeCubit>(
-        create: (_) => AppThemeCubit(),
-        child: const MaterialApp(
-          title: 'Flutter Demo',
-          home: MyHomePage(title: 'Flutter Demo Home Page'),
-        ));
+      create: (_) => AppThemeCubit(),
+      // child: BlocBuilder<AppThemeCubit, CThemeMode>(
+      //   builder: (context, state) {
+      //AppTheme.init(context);
+      child: const MaterialApp(
+        title: 'Flutter Demo',
+        home: MyHomePage(title: 'Flutter Demo Home Page'),
+      ),
+      //   },
+      // ),
+    );
   }
 }
 
@@ -39,66 +46,61 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    // return BlocBuilder<AppThemeCubit, CThemeMode>(
+    //   builder: (context, state) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            BlocBuilder<AppThemeCubit, CThemeMode>(
-              builder: (context, state) {
-                return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          context.read<AppThemeCubit>().onChangedMThemeMode();
-                        },
-                        child: Text(
-                          "Den",
-                          style: TextStyle(color: AppTheme.of(context).text),
-                        ),
+      body: Container(
+        color: AppTheme.of(context).bg,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        context.read<AppThemeCubit>().onChangedMThemeMode();
+                      },
+                      child: Text(
+                        "Den",
+                        style: TextStyle(color: AppTheme.of(context).text),
                       ),
-                      InkWell(
-                        onTap: () {
-                          // BlocProvider.of<ThemeCubit>(context)
-                          //     .toggleTheme(value: false);
-                        },
-                        child: Text("Trang"),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-            ),
-          ],
+                    ),
+                    InkWell(
+                      onTap: () {
+                        // BlocProvider.of<ThemeCubit>(context)
+                        //     .toggleTheme(value: false);
+                      },
+                      child: Text("Trang"),
+                    ),
+                  ],
+                ),
+              ),
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Main2()));
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
+    //   },
+    // );
   }
 }
